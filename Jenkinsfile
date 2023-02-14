@@ -11,6 +11,12 @@ pipeline {
             }
         }
         */
+        stage ('linting') {
+            steps {
+                    sh "mvn checkstyle:checkstyle"
+                }
+            }
+        }
         stage ('Build') {  
             when { expression { return params.Build }} 
             steps {
