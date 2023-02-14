@@ -25,6 +25,11 @@ pipeline {
                     sh "docker tag ${user}/heloapp:${currentBuild.number} ${user}/heloapp:latest"
                 }
             }
+            post {
+                always {
+                    archiveArtifacts artifacts: 'reports/'
+                }
+            }
         }
         stage ('Push to registry') {
             when { expression { return params.Build }} 
