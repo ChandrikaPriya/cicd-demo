@@ -19,6 +19,7 @@ pipeline {
         stage ('Build') {  
             when { expression { return params.Build }} 
             steps {
+                sh "mvn verify"
                 sh "mvn checkstyle:checkstyle"
                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'pass', usernameVariable: 'user')]) {
                     sh "docker build -t ${user}/heloapp:${currentBuild.number} ."
