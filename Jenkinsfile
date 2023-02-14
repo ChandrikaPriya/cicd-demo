@@ -27,7 +27,7 @@ pipeline {
             }
             post {
                 always {
-                    archiveArtifacts artifacts: 'reports/'
+                           archiveArtifacts artifacts: 'reports/**/*.xml'
                 }
             }
         }
@@ -49,5 +49,10 @@ pipeline {
                 }
             }
         }
-    }  
+    }
+    post {
+        always {
+            cleanWs()
+        }
+    }
 } 
